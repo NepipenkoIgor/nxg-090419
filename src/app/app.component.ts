@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'course-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  // interpolation: ['/', ']']
 })
 export class AppComponent {
-  title = 'ngx090419'
+  public drawer: any;
+
+  public setDrawerControl(drawer: any): void {
+    Promise.resolve().then(() => this.drawer = drawer);
+  }
 }
+
