@@ -22,21 +22,21 @@ export class SidebarComponent implements AfterViewInit, AfterContentInit {
   public drawer: any;
 
 
-  @ViewChild('container', {read: ViewContainerRef})
-  public container: ViewContainerRef;
-
-
-  @ContentChild('myDiv', {read: TemplateRef})
-  public myDiv: TemplateRef<any>;
+  // @ViewChild('container', {read: ViewContainerRef})
+  // public container: ViewContainerRef;
+  //
+  //
+  // @ContentChild('myDiv', {read: TemplateRef})
+  // public myDiv: TemplateRef<any>;
 
 
   public ngAfterViewInit(): void {
     this.setSidebarControl.emit(this.drawer);
-    this.container.createEmbeddedView(this.myDiv);
+    // this.container.createEmbeddedView(this.myDiv);
   }
 
   public ngAfterContentInit(): void {
-    console.log(this.myDiv);
+    // console.log(this.myDiv);
   }
 
 }
