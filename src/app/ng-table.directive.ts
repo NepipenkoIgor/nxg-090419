@@ -1,5 +1,5 @@
 import { Directive, Input, OnChanges, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
-import { IEvent } from './mock/data';
+import { IEvent } from './events.service';
 
 @Directive({
   selector: '[courseNgTable]'

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https:gmail.com'
+  baseUrl: 'https://ngx-course-server.herokuapp.com'
 };

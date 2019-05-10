@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'localhost:8080',
-  fireBaseConf: {}
+  fireBaseConf: {},
+  baseUrl: 'https://ngx-course-server.herokuapp.com'
 };
 
 /*

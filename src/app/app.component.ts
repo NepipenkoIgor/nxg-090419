@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { events$, IEvent } from './mock/data';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EventsService, IEvent } from './events.service';
 
 @Component({
   selector: 'course-root',
@@ -11,13 +11,19 @@ import { Observable } from 'rxjs';
 export class AppComponent implements OnInit {
   public drawer: any;
   public searchText: string = '';
-  public events$: Observable<IEvent[]> = events$;
+  public events$: Observable<IEvent[]>;
+
+  public constructor(
+    @Inject(EventsService) private _eventsService: EventsService
+  ) {
+  }
 
   public setDrawerControl(drawer: any): void {
     Promise.resolve().then(() => this.drawer = drawer);
   }
 
   public ngOnInit(): void {
+    this.events$ = this._eventsService.getEvents();
   }
 
   public search(e: Event): void {

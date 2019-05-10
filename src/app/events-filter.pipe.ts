@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IEvent } from './mock/data';
+import { IEvent } from './events.service';
 
 @Pipe({
   name: 'eventsFilter'

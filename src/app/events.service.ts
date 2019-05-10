@@ -1,5 +1,8 @@
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { BASE_URL_TOKEN } from './config';
 
 export interface IEvent {
   _id: string;
@@ -8,7 +11,7 @@ export interface IEvent {
   status: boolean;
 }
 
-export const events$: Observable<IEvent[]> = of([
+const events: IEvent[] = [
   {
     _id: '123125asfad14',
     text: 'Hi angular',
@@ -57,4 +60,21 @@ export const events$: Observable<IEvent[]> = of([
     date: new Date(),
     status: true
   },
-]).pipe(delay(3000));
+];
+
+
+export type ResTable = { table: IEvent[] };
+
+export class EventsService {
+
+  public constructor(
+    @Inject(HttpClient) private _http: HttpClient,
+  ) {
+  }
+
+  public getEvents(): Observable<IEvent[]> {
+    return this._http.get<ResTable>(`/notification/table?page=0`)
+      .pipe(map((res: ResTable) => res.table));
+
+  }
+}
