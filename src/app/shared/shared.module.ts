@@ -1,22 +1,27 @@
 import { NgModule, Type } from '@angular/core';
 import {
+  MatBadgeModule,
   MatButtonModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatListModule,
+  MatListModule, MatMenuModule,
   MatSidenavModule,
   MatToolbarModule
 } from '@angular/material';
+import { CommonModule } from '@angular/common';
 
 export const modules: Type<any>[] = [
+  CommonModule,
   MatToolbarModule,
   MatButtonModule,
   MatIconModule,
   MatSidenavModule,
   MatListModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatBadgeModule,
+  MatMenuModule
 ];
 
 @NgModule({

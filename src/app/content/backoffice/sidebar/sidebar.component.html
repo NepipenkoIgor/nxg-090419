@@ -1,10 +1,10 @@
 <mat-sidenav-container>
   <mat-sidenav #drawer mode="side">
     <mat-list role="list">
-      <mat-list-item role="listitem">
+      <mat-list-item role="listitem" [routerLink]="['dashboard']" >
         <mat-icon>dashboard</mat-icon>Доска
       </mat-list-item>
-      <mat-list-item role="listitem">
+      <mat-list-item role="listitem" [routerLink]="['events']">
         <mat-icon>notifications_active</mat-icon>Список активностей
       </mat-list-item>
     </mat-list>

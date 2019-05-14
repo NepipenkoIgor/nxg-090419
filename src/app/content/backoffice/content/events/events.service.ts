@@ -2,7 +2,7 @@ import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { BASE_URL_TOKEN } from './config';
+import { BASE_URL_TOKEN } from '../../../../config';
 
 export interface IEvent {
   _id: string;

@@ -1,0 +1,30 @@
+<mat-form-field>
+  <input matInput placeholder="Input" (input)="search($event)">
+</mat-form-field>
+
+<div class="table" *ngIf="events$ | async | eventsFilter:searchText as events; else loader">
+  <table *courseNgTable="let item by events delay 1000; index as i; h as headers">
+    <tr class="header-row" *ngIf="!i">
+      <td class="header-cell" *ngFor="let header of headers">{{header}}</td>
+    </tr>
+    <tr class="row">
+      <td class="cell">
+        {{item._id}}
+      </td>
+      <td class="cell">
+        {{item.text}}
+      </td>
+      <td class="cell">
+        {{item.date | date: 'medium'}}
+      </td>
+      <td class="cell">
+        {{item.status}}
+      </td>
+    </tr>
+  </table>
+
+</div>
+
+<ng-template #loader>
+  <span> Loading......</span>
+</ng-template>
