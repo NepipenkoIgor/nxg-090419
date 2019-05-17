@@ -1,3 +1,32 @@
-<p>
-  signup works!
-</p>
+<div class="signup-content">
+  <mat-card>
+    <form #f="ngForm" (ngSubmit)="signup(f.value)">
+      <p>Signup</p>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Username" type="text"
+               ngModel name="username"
+               courseUsernameValidator
+               courseUniqUserValidator
+               #u="ngModel"
+        >
+        <mat-error *ngIf="u.errors">
+          <span *ngFor="let error of u.errors | keyvalue"> {{error.key}}</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Email" type="text" ngModel name="email" required>
+      </mat-form-field>
+      <div ngModelGroup="password" courseEqualValidator #p="ngModelGroup">
+        <mat-error *ngIf="p.errors && p.errors.notequal">{{p.errors.notequal}}</mat-error>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Password" type="password" ngModel name="password" required minlength="5">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Repeat password" type="password" ngModel name="cpassword" required minlength="5">
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="f.invalid || f.pending">Enter</button>
+      <a mat-button [routerLink]="['/signin']">Login</a>
+    </form>
+  </mat-card>
+</div>

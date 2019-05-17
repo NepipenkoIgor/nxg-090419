@@ -1,3 +1,35 @@
-<p>
-  login works!
-</p>
+<div class="signin-content">
+  <mat-card>
+    <form #f="ngForm" (ngSubmit)="login(f.value)">
+      <p>Login</p>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Username"
+          type="text"
+          ngModel
+          name="username"
+          #c="ngModel"
+          required
+          minlength="5"
+          courseUsernameValidator
+        >
+        <mat-error *ngIf="c.errors && c.errors.nospecial">{{c.errors.nospecial}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          ngModel
+          name="password"
+          placeholder="Password"
+          type="password"
+          required
+        >
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="f.invalid">Enter</button>
+      <a mat-button [routerLink]="['/signup']">Signup</a>
+    </form>
+  </mat-card>
+
+  {{f.valid}}
+</div>

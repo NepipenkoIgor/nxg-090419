@@ -20,18 +20,11 @@ import { CustomPreloadService } from './custom-preload.service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     AppRoutingModule
   ],
   providers: [
     AuthGuardService,
     CustomPreloadService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorService,
-      multi: true
-    },
-    {provide: BASE_URL_TOKEN, useValue: baseUrl},
   ],
   bootstrap: [AppComponent]
 })
