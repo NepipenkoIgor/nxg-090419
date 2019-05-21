@@ -10,7 +10,7 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsernameValidatorDirective } from './directives/username-validator.directive';
 import { ValidatorService } from '@shared/services/validator.service';
 import { EqualValidatorDirective } from './directives/equal-validator.directive';
@@ -18,6 +18,7 @@ import { UniqUserValidatorDirective } from './directives/uniq-user-validator.dir
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptorService } from '../interceptor.service';
 import { BASE_URL_TOKEN, baseUrl } from '../config';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 export const modules: Type<any>[] = [
   CommonModule,
@@ -33,6 +34,8 @@ export const modules: Type<any>[] = [
   MatCardModule,
   FormsModule,
   HttpClientModule,
+  FlexLayoutModule,
+  ReactiveFormsModule
 ];
 
 @NgModule({

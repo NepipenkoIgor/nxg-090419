@@ -1,0 +1,39 @@
+<form [formGroup]="initialsGroup">
+  <span>Information</span>
+  <mat-card>
+    <mat-card-content fxLayout="column" fxLayoutAlign="space-evenly stretch">
+      <mat-form-field fxFlex="50%">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          placeholder="name"
+          type="text"
+        >
+        <!--               <mat-error *ngIf="c.errors && c.errors.nospecial">{{c.errors.nospecial}}</mat-error>-->
+      </mat-form-field>
+      <mat-form-field fxFlex="50%">
+        <mat-label>Surname</mat-label>
+        <input
+          matInput
+          formControlName="surname"
+          placeholder="surname"
+          type="text"
+        >
+        <!--               <mat-error *ngIf="c.errors && c.errors.nospecial">{{c.errors.nospecial}}</mat-error>-->
+      </mat-form-field>
+
+      <div fxFlex="50%">
+        <span>Male</span>
+        <course-switcher formControlName="male"></course-switcher>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end">
+        <button mat-raised-button color="primary" type="submit"
+                [disabled]="initialsGroup.invalid || initialsGroup.pristine">
+          Save
+        </button>
+      </div>
+      <pre>{{initialsGroup.value | json}}</pre>
+    </mat-card-content>
+  </mat-card>
+</form>

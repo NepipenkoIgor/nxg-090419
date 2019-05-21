@@ -1,7 +1,7 @@
 import { ValidationErrors } from '@angular/forms';
-import { Observable, of } from 'rxjs';
+import { Observable, of, timer } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { debounceTime, map } from 'rxjs/operators';
+import { debounceTime, map, switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -10,16 +10,17 @@ export class ValidatorService {
   public constructor(private http: HttpClient) {
   }
 
-
   public uniqUsernameValidator(value: string): Observable<ValidationErrors | null> {
     if (!value) {
       return of(null);
     }
-    return this.http.post('/auth/checkUsername', {username: value})
-      .pipe(
-        // TODO debounce in async validator
-        debounceTime(500),
-        map((errorObj: ValidationErrors) => (errorObj ? errorObj : null))
+    return timer(500)
+      .pipe(switchMap(() =>
+          this.http.post('/auth/checkUsername', {username: value})
+            .pipe(
+              map((errorObj: ValidationErrors) => (errorObj ? errorObj : null))
+            )
+        )
       );
   }
 
