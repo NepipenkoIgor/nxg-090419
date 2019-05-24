@@ -19,6 +19,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptorService } from '../interceptor.service';
 import { BASE_URL_TOKEN, baseUrl } from '../config';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AuthService } from '@shared/services/auth.service';
 
 export const modules: Type<any>[] = [
   CommonModule,
@@ -44,6 +45,7 @@ export const modules: Type<any>[] = [
   declarations: [UsernameValidatorDirective, EqualValidatorDirective, UniqUserValidatorDirective],
   providers: [
     ValidatorService,
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

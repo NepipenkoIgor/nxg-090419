@@ -2,31 +2,39 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BASE_URL_TOKEN } from './config';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
+import { AuthService } from '@shared/services/auth.service';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
 
   public constructor(
     @Inject(BASE_URL_TOKEN) private _baseUrl: string[],
+    private authService: AuthService
   ) {
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let headers: HttpHeaders = req.headers.append('Content-type', 'application/json');
-    headers = headers.append('Authorization',
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImluZXBpcGVua28iLCJpYXQiOjE1NTcxNDczMjd9._oExgYV5gC8zlfcvcHnrEqhO7kxHVYTu5SXk96RLc6k');
-    const jsonReq: HttpRequest<any> = req.clone(
-      {
-        headers,
-        url: `${this._baseUrl}${req.url}`
-      }
-    );
-    return next.handle(jsonReq)
+    return this.authService.getTokenFromLocalStorage()
       .pipe(
-        filter(this._isHttpResponse),
-        map((res: HttpResponse<any>) => {
-          return res.clone({body: res.body && res.body.data});
+        switchMap((accessToken: string) => {
+          let headers: HttpHeaders = req.headers.append('Content-type', 'application/json');
+          if (req.url !== '/auth/signin' && req.url !== '/auth/signup' && req.url !== '/auth/checkUsername') {
+            headers = headers.append('Authorization', `Bearer ${accessToken}`);
+          }
+          const jsonReq: HttpRequest<any> = req.clone(
+            {
+              headers,
+              url: `${this._baseUrl}${req.url}`
+            }
+          );
+          return next.handle(jsonReq)
+            .pipe(
+              filter(this._isHttpResponse),
+              map((res: HttpResponse<any>) => {
+                return res.clone({body: res.body && res.body.data && res.body.data._doc});
+              })
+            );
         })
       );
   }
