@@ -32,7 +32,7 @@ export class InterceptorService implements HttpInterceptor {
             .pipe(
               filter(this._isHttpResponse),
               map((res: HttpResponse<any>) => {
-                return res.clone({body: res.body && res.body.data && res.body.data._doc});
+                return res.clone({body: res.body && res.body.data});
               })
             );
         })

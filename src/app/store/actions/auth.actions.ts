@@ -14,6 +14,7 @@ export enum AuthActions {
   LOGOUT_ERROR = '[Auth] LOGOUT_ERROR',
 }
 
+
 export class LoginPending implements Action {
   public type: string = AuthActions.LOGIN_PENDING;
 

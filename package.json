@@ -42,6 +42,7 @@
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
+    "jasmine-marbles": "^0.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.1.1",
     "karma-chrome-launcher": "~2.2.0",
@@ -54,5 +55,7 @@
     "tslint": "~5.11.0",
     "typescript": "~3.2.2"
   },
-  "pre-commit": []
+  "pre-commit": [
+
+  ]
 }

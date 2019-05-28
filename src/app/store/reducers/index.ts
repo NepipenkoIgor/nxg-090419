@@ -43,7 +43,7 @@ export interface IRouterPayload {
   extras?: NavigationExtras;
 }
 
-export class CustomRouterSerialazer implements RouterStateSerializer<IRouterStateUrl> {
+export class CustomRouterSerializer implements RouterStateSerializer<IRouterStateUrl> {
   public serialize(routerState: RouterStateSnapshot): IRouterStateUrl {
     const {
       url,

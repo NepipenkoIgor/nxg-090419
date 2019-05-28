@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { AuthGuardService } from './auth-guard.service';
 import { CustomPreloadService } from './custom-preload.service';
+import { CdComponent } from './content/cd/cd.component';
 
 const routes: Route[] = [
   {
@@ -18,6 +19,15 @@ const routes: Route[] = [
     path: 'backoffice',
     loadChildren: './content/backoffice/backoffice.module#BackofficeModule',
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'backoffice',
+    loadChildren: './content/backoffice/backoffice.module#BackofficeModule',
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'cd',
+    component: CdComponent
   },
   {
     path: '**',

@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { IRootStore } from '../../../store/reducers';
+import { Store } from '@ngrx/store';
+import { LogoutPending } from '../../../store/actions/auth.actions';
 
 @Component({
   selector: 'course-header',
@@ -15,7 +18,8 @@ export class HeaderComponent implements OnInit {
     .bypassSecurityTrustHtml('<h3 style="color:orange" >Team Board</h3>');
 
   public constructor(
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private _store: Store<IRootStore>,
   ) {
   }
 
@@ -23,4 +27,7 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  public logout(): void {
+    this._store.dispatch(new LogoutPending());
+  }
 }
